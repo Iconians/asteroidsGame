@@ -1,3 +1,4 @@
+import sys
 import pygame
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH, ASTEROID_MIN_RADIUS, ASTEROID_KINDS, ASTEROID_SPAWN_RATE, ASTEROID_MAX_RADIUS
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -33,6 +34,12 @@ def main():
 
         for obj in updatable:
             obj.update(dt)
+        
+        for asteroid in asteroids:
+            if player.check_collision(asteroid):
+                print("Game over!")
+                sys.exit()
+                # return
         
         for obj in drawable:
             obj.draw(screen)
